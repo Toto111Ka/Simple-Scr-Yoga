@@ -1,4 +1,4 @@
-window.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('DOMContentLoaded', function() {
 
     'use strict';
 
@@ -23,7 +23,7 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    info.addEventListener('click', (event) => {
+    info.addEventListener('click', function(event){
         let target = event.target;
         if (target && target.classList.contains('info-header-tab')) {
             for ( let i = 0; i < tab.length; i++) {
@@ -95,13 +95,13 @@ window.addEventListener('DOMContentLoaded', () => {
         overlay = document.querySelector('.overlay'),
         close = document.querySelector('.popup-close');
     
-    more.addEventListener('click', () => {
+    more.addEventListener('click', function() {
         overlay.style.display = 'block';
         this.classList.add('more-splash');
         document.body.style.overflow = 'hidden';
     });
 
-    close.addEventListener('click', () => {
+    close.addEventListener('click', function(){
         overlay.style.display = 'none';
         more.classList.remove('more-splash');
         document.body.style.overflow = '';
@@ -109,27 +109,13 @@ window.addEventListener('DOMContentLoaded', () => {
 
     let descriptionBtn = document.querySelectorAll('.description-btn');
         descriptionBtn.forEach(element => {
-           element.addEventListener('click', () => {
+           element.addEventListener('click', function(){
             overlay.style.display = 'block';
             this.classList.add('more-splash');
             document.body.style.overflow = 'hidden';
         });
     });
-    
-    // Options
-
-    class options {
-        constructor(height, width, bg, fontSize, textAlign) {
-            this.height = height;
-            this.width = width;
-            this.bg = bg;
-            this.fontSize = fontSize;
-            this.textAlign = textAlign;
-        }
-    }
 
 });
-
-
 
 
