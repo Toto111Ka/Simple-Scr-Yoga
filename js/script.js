@@ -117,8 +117,8 @@ window.addEventListener('DOMContentLoaded', () => {
     });
     
     // Options
-
-    class options {
+    
+    class Options {
         constructor(height, width, bg, fontSize, textAlign) {
             this.height = height;
             this.width = width;
@@ -126,8 +126,14 @@ window.addEventListener('DOMContentLoaded', () => {
             this.fontSize = fontSize;
             this.textAlign = textAlign;
         }
-    }
-
+        div() {
+            let div = document.createElement('div');
+            document.body.appendChild(div);
+        } 
+    } 
+    var options = new Options();
+    options.div();
+    
 });
 
 
