@@ -127,13 +127,22 @@ window.addEventListener('DOMContentLoaded', () => {
             this.textAlign = textAlign;
         }
         div() {
-            let div = document.createElement('div');
-            document.body.appendChild(div);
+            let content = document.querySelector('.content'),
+                footer = document.querySelector('footer'),
+                div = document.createElement('div');
+            content.appendChild(div);
+            content.insertBefore(div, footer);
+            div.classList.add('MagicBox');
         } 
+        box() {
+            let text = document.createElement('INPUT');
+                content.this.appendChild(text);
+                return;
+         }  
     } 
     var options = new Options();
     options.div();
-    
+
 });
 
 
