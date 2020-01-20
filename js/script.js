@@ -127,24 +127,22 @@ window.addEventListener('DOMContentLoaded', () => {
             this.textAlign = textAlign;
         }
         div() {
-            let content = document.querySelector('.content'),
-                footer = document.querySelector('footer'),
-                div = document.createElement('div');
-            content.appendChild(div);
-            content.insertBefore(div, footer);
-            div.classList.add('MagicBox');
-        } 
-        box() {
-            let text = document.createElement('INPUT');
-                content.this.appendChild(text);
-                return;
-         }  
+            let footer = document.querySelector('footer'),
+                txtbx = document.createElement('txtbx');
+                footer.before(txtbx);
+                txtbx.innerHTML = '<textarea name="text"></textarea><p><button type="submit" value="Отправить"> <button type="reset" value="Очистить"></p>';
+        return this.div2();
+        }
+        div2() {
+            submit = document.querySelector('submit');
+            reset = document.querySelector('reset');
+            
+
+        }
+
     } 
     var options = new Options();
     options.div();
-
 });
-
-
 
 
