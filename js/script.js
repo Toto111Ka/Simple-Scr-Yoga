@@ -1,4 +1,4 @@
-window.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('DOMContentLoaded', function() {
 
     'use strict';
 
@@ -23,7 +23,7 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    info.addEventListener('click', (event) => {
+    info.addEventListener('click', function(event){
         let target = event.target;
         if (target && target.classList.contains('info-header-tab')) {
             for ( let i = 0; i < tab.length; i++) {
@@ -95,13 +95,13 @@ window.addEventListener('DOMContentLoaded', () => {
         overlay = document.querySelector('.overlay'),
         close = document.querySelector('.popup-close');
     
-    more.addEventListener('click', () => {
+    more.addEventListener('click', function() {
         overlay.style.display = 'block';
         this.classList.add('more-splash');
         document.body.style.overflow = 'hidden';
     });
 
-    close.addEventListener('click', () => {
+    close.addEventListener('click', function(){
         overlay.style.display = 'none';
         more.classList.remove('more-splash');
         document.body.style.overflow = '';
@@ -109,40 +109,13 @@ window.addEventListener('DOMContentLoaded', () => {
 
     let descriptionBtn = document.querySelectorAll('.description-btn');
         descriptionBtn.forEach(element => {
-           element.addEventListener('click', () => {
+           element.addEventListener('click', function(){
             overlay.style.display = 'block';
             this.classList.add('more-splash');
             document.body.style.overflow = 'hidden';
         });
     });
-    
-    // Options
-    
-    class Options {
-        constructor(height, width, bg, fontSize, textAlign) {
-            this.height = height;
-            this.width = width;
-            this.bg = bg;
-            this.fontSize = fontSize;
-            this.textAlign = textAlign;
-        }
-        div() {
-            let footer = document.querySelector('footer'),
-                txtbx = document.createElement('txtbx');
-                footer.before(txtbx);
-                txtbx.innerHTML = '<textarea name="text"></textarea><p><button type="submit" value="Отправить"> <button type="reset" value="Очистить"></p>';
-        return this.div2();
-        }
-        div2() {
-            submit = document.querySelector('submit');
-            reset = document.querySelector('reset');
-            
 
-        }
-
-    } 
-    var options = new Options();
-    options.div();
 });
 
 
