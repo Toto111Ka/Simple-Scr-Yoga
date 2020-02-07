@@ -116,6 +116,31 @@ window.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    // From
+
+    let message = {
+        loading: 'Загрузка...',
+        success: 'Спасибо скоро мы свяжимся с вами!',
+        failure: 'чтото пошло не так'
+    };
+
+    let form = document.querySelector('.main-form'),
+        input = form.getElementsByTagName('input'),
+        statusMassage = document.createElement('div');
+
+        statusMassage.classlist.add('status');
+    
+    form.addEventListener('submit', function(event){
+        event.preventDefault();
+        form.appendChild(statusMassage);
+
+        let request = new XMLGttpRequest();
+        request.open('POST', 'server.php');
+        request.setRequestHeader ('Content-Type', 'application/x-ww-from-urkencoded');
+
+        
+    });
+
 });
 
 
