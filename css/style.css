@@ -674,7 +674,7 @@ header ul li:before {
   height: 56px;
   margin-top: 17px;
   font-size: 18px;
-  background-color: #c78030;
+  background-color: transparent;
   border: none;
   color: #fff;
   text-align: center;
