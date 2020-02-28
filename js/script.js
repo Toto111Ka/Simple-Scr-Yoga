@@ -134,32 +134,38 @@ window.addEventListener('DOMContentLoaded', function() {
         event.preventDefault();
         form.appendChild(statusMassage);
 
-        let request = new XMLHttpRequest();
-        request.open('POST', 'server.php');
-        request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        //request.setRequestHeader ('Content-type', 'application/json; charset=utf-8'); // JSON form
+        function postData() {
+            return new Promise(function(resolve, reject) {     //возврат Обещаний без создание переменных
+                let request = new XMLHttpRequest();
+                    request.open('POST', 'server.php');
+                    request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                
+                let formData = new FormData(form);
 
-        let formData = new FormData(form);
+                request.addEventListener('readystatechange', function(){
+                    if (request.readyState < 4) {
+                    resolve();
+                    } else if(request.readyState === 4 && request.status ==200) {
+                    resolve();
+                    } else {
+                    reject();
+                    }
+                request.send(formData);
+            });
+        };
 
-        // let obj = {};   // преобразование данных в читаемый объект
-        // formData.forEach(function(value, key) {
-        //     obj[key] = value;
-        // });
-        // let json = JSON.stringify(obj);
-        // request.send(json);
+        postData({})
+        .then(mark => console.log('You hit in target!'))
+        .then(win)  
+        .catch(loose) 
 
-        request.send(formData);
+        statusMassage.innerHTML = message.loading
 
-        request.addEventListener('readystatechange', function(){
-            if (request.readyState < 4) {
-                statusMassage.innerHTML = message.loading;
-            } else if(request.readyState === 4 && request.status ==200) {
-                statusMassage.innerHTML = message.success;
-            } else {
-                statusMassage.innerHTML = message.failure;
-            }
-        });
-        
+        statusMassage.innerHTML = message.success;
+
+        statusMassage.innerHTML = message.failure;
+
+
         for (let i = 0; i < input.length; i++) {
             input[i].value = '';
         }
@@ -192,5 +198,3 @@ window.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
-
-
