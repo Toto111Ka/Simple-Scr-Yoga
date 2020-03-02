@@ -130,71 +130,81 @@ window.addEventListener('DOMContentLoaded', function() {
         statusMassage = document.createElement('div');
         statusMassage.classList.add('status');
     
-    form.addEventListener('submit', function(event){
-        event.preventDefault();
-        form.appendChild(statusMassage);
-
-        function postData() {
-            return new Promise(function(resolve, reject) {     //возврат Обещаний без создание переменных
-                let request = new XMLHttpRequest();
-                    request.open('POST', 'server.php');
-                    request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-                
+        function sendForm(form){
+            form.addEventListener('submit', function(event){
+                event.preventDefault();
+                form.appendChild(statusMassage);
                 let formData = new FormData(form);
 
-                request.addEventListener('readystatechange', function(){
-                    if (request.readyState < 4) {
-                    resolve();
-                    } else if(request.readyState === 4 && request.status ==200) {
-                    resolve();
-                    } else {
-                    reject();
+                function postData() {
+                    return new Promise(function(resolve, reject) {     //возврат Обещаний без создание переменных
+                        let request = new XMLHttpRequest();
+                            request.open('POST', 'server.php');
+                            request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+                            request.addEventListener('readystatechange', function(){
+                                if (request.readyState < 4) {
+                                resolve();
+                                } else if(request.readyState === 4 && request.status ==200) {
+                                resolve();
+                                } else {
+                                reject();
+                                }
+                            });
+                        request.send(formData);
+                    });
+
+                }
+                function clearInput () {
+                    for (let i = 0; i < input.length; i++) {
+                        input[i].value = '';
                     }
-                request.send(formData);
+                }
+                postData(formData)
+                .then(() => statusMassage.innerHTML = message.loading)
+                .then(() => statusMassage.innerHTML = message.success)  
+                .catch(() => statusMassage.innerHTML = message.failure)
+                .then (clearInput);   
             });
-        };
+            contactForm.addEventListener('submit', function(event){
+                event.preventDefault();
+                contactForm.appendChild(statusMassage);
+                let contactFormData = new FormData(contactForm);
 
-        postData({})
-        .then(mark => console.log('You hit in target!'))
-        .then(win)  
-        .catch(loose) 
+                function postData() {
+                    return new Promise(function(resolve, reject) {     //возврат Обещаний без создание переменных
+                        let request = new XMLHttpRequest();
+                            request.open('POST', 'server.php');
+                            request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
-        statusMassage.innerHTML = message.loading
+                            request.addEventListener('readystatechange', function(){
+                                if (request.readyState < 4) {
+                                resolve();
+                                } else if(request.readyState === 4 && request.status ==200) {
+                                resolve();
+                                } else {
+                                reject();
+                                }
+                            });
+                        request.send(contactFormData);
+                    });
 
-        statusMassage.innerHTML = message.success;
-
-        statusMassage.innerHTML = message.failure;
-
-
-        for (let i = 0; i < input.length; i++) {
-            input[i].value = '';
+                }
+                function clearInput () {
+                    for (let i = 0; i < input.length; i++) {
+                        input[i].value = '';
+                    }
+                }
+                postData(contactFormData)
+                .then(() => statusMassage.innerHTML = message.loading)
+                .then(() => statusMassage.innerHTML = message.success)  
+                .catch(() => statusMassage.innerHTML = message.failure)
+                .then (clearInput);   
+            });
         }
-    });
 
-    contactForm.addEventListener('submit', function(event){
-        event.preventDefault();
-        contactForm.appendChild(statusMassage);
+    
+    sendForm(form);
+    sendForm(contactForm);
 
-        let request = new XMLHttpRequest();
-        request.open('POST', 'server.php');
-        request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-
-        let contactFormData = new FormData(contactForm);
-        request.send(contactFormData);
-
-        request.addEventListener('readystatechange', function(){
-            if (request.readyState < 4) {
-                statusMassage.innerHTML = message.loading;
-            } else if(request.readyState === 4 && request.status ==200) {
-                statusMassage.innerHTML = message.success;
-            } else {
-                statusMassage.innerHTML = message.failure;
-            }
-            statusMassage.style.color = 'gray';
-        });
-        
-        for (let i = 0; i < input.length; i++) {
-            input[i].value = '';
-        }
-    });
 });
